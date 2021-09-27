@@ -1,16 +1,18 @@
+name: Semgrep
 on:
   pull_request: {}
   push:
     branches:
-    - main
-    - master
-name: Semgrep
+      - main
+      - master
 jobs:
   semgrep:
     name: Scan
     runs-on: ubuntu-latest
+    if: (github.actor != 'dependabot[bot]')
     steps:
-      # Fetch project source
       - uses: actions/checkout@v2
-      - name: semgrep-action
-        uses: returntocorp/semgrep-action@v1
+      - uses: returntocorp/semgrep-action@v1
+        with:
+          auditOn: push
+          publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
