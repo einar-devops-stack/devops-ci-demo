@@ -10,5 +10,7 @@ jobs:
     name: Scan
     runs-on: ubuntu-latest
     steps:
-    - name: semgrep-action
-      uses: returntocorp/semgrep-action@v1
+      # Fetch project source
+      - uses: actions/checkout@v2
+      - name: semgrep-action
+        uses: returntocorp/semgrep-action@v1
